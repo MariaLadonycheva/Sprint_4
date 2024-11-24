@@ -20,7 +20,7 @@ public class MainPage {
 
     private final By beginningQuestions = By.xpath(".//div[@class='Home_SubHeader__zwi_E' and text()='Вопросы о важном']");
     //Локатор для вопроса
-    private final String question = ".//div[@id='accordion__heading-%d' and text()='%s']";
+    private final String question = ".//div[text()='%s']";
     //Локатор для ответа на вопрос
     private final String accordionPanel = ".//div[@id='accordion__panel-%d']";
     private int itemIndex;
@@ -63,15 +63,15 @@ public class MainPage {
         return this;
     }
 
-    public String getItemText(int itemIndex, String questionText) {
-        webDriver.findElement(By.xpath(String.format(question, itemIndex, questionText))).click();
+    public String getItemText(String questionText) {
+        webDriver.findElement(By.xpath(String.format(question, questionText))).click();
         try {
             Thread.sleep(6000); //
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        webDriver.findElement(By.xpath(String.format(accordionPanel, itemIndex))).isDisplayed();
-        return webDriver.findElement(By.xpath(String.format(accordionPanel, itemIndex))).getText();
+        webDriver.findElement(By.xpath(String.format(accordionPanel))).isDisplayed();
+        return webDriver.findElement(By.xpath(String.format(accordionPanel))).getText();
     }
 
 
